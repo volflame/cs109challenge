@@ -103,5 +103,4 @@ if __name__ == "__main__":
     import os
     port = int(os.environ.get('PORT', 6969))
 
-    webbrowser.open("http://127.0.0.1:6969/")
-    app.run(port=port, debug=True)
+    app.run(port = port)
