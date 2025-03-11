@@ -100,6 +100,7 @@ def nextq():
 
 if __name__ == "__main__":
     import webbrowser
+    import os
     port = int(os.environ.get('PORT', 6969))
 
     webbrowser.open("http://127.0.0.1:6969/")
