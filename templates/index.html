@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS 109 Challenge</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <div style="text-align: center;">
+        <div style="display: inline-block; text-align: left; 
+        max-width: 60%; position: relative">
+            <p style = "font-size: 20px"><span style = "font-size: 60px;">CoDa's First CS "1-0-Crime": The Great Fruit Heist</span> <br> Ryan Li. CS 109 Challenge. Inspired by Detective Conan and Akinator.</p>
+            <br>
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <div style="display: inline-block; text-align: left; 
+        max-width: 60%; position: relative">
+            You're studying in CoDa when suddenly, an unknown professor bolts out the back exit with plenty of fruits in hand. <span style = "font-family: jersey; font-size: 30px">Detective Conan</span>—iconic star of manga and anime-adapted series Case Closed, with his sharp glasses, signature blue suit, and red bowtie—casually walks past you, as if he hasn't spent decades solving impossible mysteries and outsmarting criminals twice his size. <br> <br>  As a CS 109 student, you know how important those fruits are to the overall learning of the class. You need to do something, anything, to get those fruits back. So, you recruit <span style = "font-family: jersey; font-size: 30px">Conan</span> for help.
+        </div>
+    </div>
+    <img src="{{ url_for('static', filename='images/detective-conan1.gif')}}">
+    <!--https://procul.org/images/2025/pixel-kat-gif-tumblr/-->
+    <!--https://giphy.com/pixeljeff-->
+    <!--https://www.pinterest.com/pin/pikachu--145804106671343175/-->
+    <!--https://www.reddit.com/r/PixelArt/comments/15pyy8k/gengar/-->
+    <!--https://www.pinterest.com/pin/gengar-gif-discover-more-purple-cartoon-cute-gengar-pokemon-gif-download-httpswwwicegifcomgengar48-in-2023--489344315775031034/-->
+    <!--https://tenor.com/view/detective-conan-gif-14525506-->
+    <!--<div style="text-align: center;">
+        <div style="display: inline-block; text-align: left; 
+        max-width: 70%; position: relative; 
+        font-family: 'jersey'; font-size: 100px;
+        color: #D0D0D0 ">
+        <div class = "glow">
+            TenureTracker
+        </div>
+        </div>
+    </div> -->
+    <br>
+    <div class="container">
+        <span class="typed-out">"Shinjitsu wa itsumo hitotsu! (There is always only one truth!)"</span>
+    </div>
+    <div style="text-align: center;">
+        <div style="display: inline-block; text-align: left; 
+        max-width: 60%; position: relative; padding-top: 3%">
+            Luckily, he agrees. (And enthusiastically, so.) <br><br>
+            <b style = "font-family: jersey; font-size: 30px">CONAN:</b> Our suspect is on the run! Let's use Professor Asaga's <span class="glow", style = "font-size: 30px;">TenureTracker</span> to identify them! We know two things for sure:
+            <br> 1. The suspect is a Stanford CS faculty and 
+            <br> 2. They stole all of Chris Piech's fruits! (The horror!)
+            <br> 
+            <br>
+            <b style = "font-family: jersey; font-size: 30px">YOU:</b> How does this device even work?
+            <br>
+            <br> 
+            <b style = "font-family: jersey; font-size: 30px">CONAN:</b> Professor Asaga says it uses <span style = "font-size:30px", class = "glow">uncertainty theory</span> to narrow down who we have in mind extremely quickly--some even speculate a justice-dishing speed of log<sub>2</sub>(n), where n is our number of suspects. Quick! We have a list of clues, and a whole lotta suspects. Let's get this thing started!
+        </div>
+    </div>
+    <br>
+
+
+<br>
+<br>
+<br>
+<div id="div_id">
+    <div id="questions-container">
+        <div class="question-box">
+            <h1>Question:</h1>
+            <span id="1111" class="QUESTION">{{ question }}</span>
+            <form>
+                <button type="submit" onclick="askq(event, 'Yes', '1111', 'result')">Yes</button>
+                <button type="submit" onclick="askq(event, 'No', '1111', 'result')">No</button>
+            </form>
+            <h3 id="unc"></h3>
+            <img class="plot-img" id="result"/>
+        </div>
+    </div>    
+</div>
+<script>
+
+async function askq(event, choice, qId, imgid) {
+    event.preventDefault(); // Prevent form submission
+    let questionText = document.getElementById(qId).innerText;
+    try {
+        let response = await fetch(`/guess?question=${encodeURIComponent(questionText)}&answer=${encodeURIComponent(choice)}`);
+        
+        if (response.ok) {
+            // If the response is an image, display it
+            let data = await response.json();
+            document.getElementById(imgid).src = data.img;
+
+            if(data.certain) {
+                showResult(data.name)
+            } else getNextQuestion();
+        } else {
+            console.error("Error fetching response:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+function showResult(culpritName) {
+    // Create the result div dynamically
+    const resultDiv = document.createElement("div");
+    resultDiv.classList.add("result");
+
+    if(culpritName == "Christopher Piech") {
+        resultDiv.innerHTML = `
+        <h2>It was all a big misunderstanding all along!</h2>
+        <div class="culprit-info">
+            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdGM_7NsA8l5AmcutSxeJmha57_20jiakyBw&s' />
+            <h3>Culprit: <span>${culpritName}</span></h3>
+        </div>
+<button onclick="window.location.reload();">Try to find another professor!</button>
+    `;
+    } else {
+    // Set the inner HTML for the result div
+    resultDiv.innerHTML = `
+        <h2>Wrongful misunderstanding!</h2>
+        <div class="culprit-info">
+            <h3>Culprit: <span>${culpritName}</span></h3>
+        </div>
+<button onclick="window.location.reload();">Justice waits for no one, try again!</button>
+    `;
+    }
+
+
+
+    // Append the result div to the body or a specific container
+    document.body.appendChild(resultDiv);
+}
+
+function getNextQuestion() {
+    fetch("/next") // Call Flask route to get next question
+        .then(response => response.json()) // Parse JSON
+        .then(data => {
+            // Create a new question div
+            let newDiv = document.createElement("div");
+            newDiv.classList.add("question-box");
+            newDiv.innerHTML = `
+                <h1>Question:</h1>
+                <span class="QUESTION" id='ID-${data.question}'>${data.question}</span>
+                <form>
+                    <button type="submit" onclick="askq(event, 'Yes', 'ID-${data.question}', 'q-${data.question}')">Yes</button>
+                    <button type="submit" onclick="askq(event, 'No', 'ID-${data.question}', 'q-${data.question}')">No</button>
+                </form>
+                <h3>${data.uncertainty}</h3>
+                <img class="plot-img" id='q-${data.question}'>
+            `;
+
+            // Append to the container
+            document.getElementById("questions-container").appendChild(newDiv);
+        })
+        .catch(error => console.error("Error fetching question:", error));
+}
+
+
+
+
+</script>
+</body>
+</html>

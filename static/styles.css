@@ -1,0 +1,191 @@
+@font-face {
+    font-family: 'push2start';
+    src: url('fonts/Press_Start_2P/PressStart2P-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'handwritten';
+    src: url('fonts/Press_Start_2P,Schoolbell/Schoolbell/Schoolbell-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'jersey';
+    src: url('fonts/Jersey_10/Jersey10-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'patrick';
+    src: url('fonts/Patrick_Hand/PatrickHand-Regular.ttf');
+}
+/* Base styling for the button */
+button {
+    margin-top: 30px;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-family: 'jersey';
+    font-weight: bold;
+    font-size: 25px;
+    color: #333;
+    background-color: white;
+    border: 2px solid #e63946;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+/* Hover effect */
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    border-color: #ff9a8b;
+    color: #e63946;
+    background-color: #f9f9f9;
+}
+
+/* Active state */
+button:active {
+    transform: scale(0.98);
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+    background-color: #e63946;
+    color: white;
+    border-color: #e63946;
+}
+
+/* Fun animation on click */
+button:focus {
+    animation: bounce 0.3s ease-in-out;
+}
+
+/* Bouncing animation for focus */
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.05);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+
+/* Optional: Styling for button text */
+button span {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect for text */
+button:hover span {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+body { 
+    background-color: 		#27445D;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    text-align: center; 
+    line-height: 1.2;
+    word-spacing: 8px;
+    font-family: "patrick";
+    font-size: 25px;
+    color: white
+}
+
+::selection {
+    background: #C98CA7;
+    color: black;
+    text-shadow: none;
+}
+
+::-moz-selection {
+    background: #C98CA7;
+    color: #EEE;
+    text-shadow: none;
+}
+
+.glow {
+    font-size: 80px;
+    font-family: "jersey";
+    color: #fff;
+    text-align: center;
+    animation: glow 3s ease-in-out infinite alternate; /* Slower for better performance */
+    will-change: text-shadow; /* Hints browser to optimize */
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #e63946, 0 0 20px #e63946, 0 0 30px #e63946;
+    }
+    to {
+        text-shadow: 0 0 15px #ef233c, 0 0 25px #d90429, 0 0 35px #9b2226;
+    }
+}
+
+/* Animation */
+
+.container {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.typed-out {
+    overflow: hidden;
+    border-right: 2px solid white; /* Cursor effect */
+    font-size: 30px;
+    display: inline-block; /* Ensures text doesn't break layout */
+    max-width: 0; /* Start hidden */
+    
+    animation: 
+        typing 5s steps(20, end) infinite, 
+        blink 0.8s infinite 2s; /* Blink starts after typing */
+}
+
+@keyframes typing {
+    0% { max-width: 0; }
+    30% { max-width: 100%; } /* Fully typed */
+    70% { max-width: 100%; } /* Wait before deleting */
+    100% { max-width: 0; } /* Delete text */
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* Initially hide the content */
+.content {
+    display: none;
+}
+
+  /* Add some styling for the collapsible content */
+/* Initially hide the content */
+.content {
+    display: none;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
+
+  /* Styling for the collapsible button */
+.collapsible {
+    background-color: #c1121f;
+    color: white;
+    cursor: pointer;
+    padding: 30px;
+    width: 20%;
+    border-radius: 0px;
+    border: none;
+    text-align: left;
+    font-size: 40px;
+    font-family: "jersey"
+}
+
+  /* Active style when the collapsible is open */
+.collapsible.active {
+    background-color: #555;
+}
+
+html { 
+    scroll-behavior: smooth; 
+}
